@@ -1,3 +1,7 @@
-const Home = () => <h1>Hello world!</h1>;
+const Index = () => <h1>Hello world!</h1>;
 
-export default Home;
+Index.getInitialProps = (props): void => {
+  console.log(props);
+};
+
+export default Index;
