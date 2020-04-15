@@ -36,7 +36,7 @@ export const deleteTodo = (id: number): DeleteTodoAction => {
 
 export const fetchTodos = createAction(ActionTypes.fetchTodos);
 
-export function* fetchTodosAsync(action) {
+export function* fetchTodosAsync() {
   const todos = () => axios.get<Todo[]>(url);
   const request = yield call(todos);
   yield put({

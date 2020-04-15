@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from '@reduxjs/toolkit';
 import { todosReducers } from './todos';
 import { Todo } from '../actions';
 
@@ -6,8 +6,10 @@ export interface StoreState {
   todos: Todo[];
 }
 
-const rootReducers = combineReducers<StoreState>({
+const rootReducer = combineReducers({
   todos: todosReducers
 });
 
-export default rootReducers;
+export type RootState = ReturnType<typeof rootReducer>;
+
+export default rootReducer;
