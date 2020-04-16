@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "tslint": "tslint -p . -c tslint.json"
   },
   "keywords": [],
   "author": "",
@@ -32,6 +33,9 @@
     "babel-plugin-module-resolver": "^4.0.0",
     "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",
+    "tslint": "^6.1.1",
+    "tslint-config-airbnb": "^5.11.2",
+    "tslint-react-hooks": "^2.2.2",
     "typescript": "^3.8.3"
   }
 }

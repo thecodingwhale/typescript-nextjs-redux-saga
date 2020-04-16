@@ -17,10 +17,10 @@ if (devMode) {
 
 export default (preloadedState = {}) => {
   const store = configureStore({
-    reducer: rootReducer,
-    devTools: devMode,
     middleware,
-    preloadedState
+    preloadedState,
+    reducer: rootReducer,
+    devTools: devMode
   });
   (store as any).sagaTask = sagaMiddleware.run(rootSaga);
   return store;
