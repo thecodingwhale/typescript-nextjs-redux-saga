@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Todo, fetchTodos, deleteTodo } from '../actions';
 import { StoreState } from '../reducers';
 
@@ -13,17 +13,21 @@ interface AppState {
   fetching: boolean;
 }
 
-const _App: React.FC<AppProps> = props => {
+const App: React.FC<AppProps> = props => {
+  const dispatch = useDispatch();
+  const todos = useSelector((state: StoreState): Todo[] => {
+    return state.todos;
+  });
   const [fetching, setFetching] = React.useState<AppState | boolean>(false);
   const onButtonClick = (): void => {
-    props.fetchTodos();
+    dispatch(fetchTodos());
     setFetching(true);
   };
   const onTodoClick = (id: number): void => {
-    props.deleteTodo(id);
+    dispatch(deleteTodo(id));
   };
   const renderLists = (): JSX.Element[] => {
-    return props.todos.map((todo: Todo) => {
+    return todos.map((todo: Todo) => {
       return (
         <div onClick={() => onTodoClick(todo.id)} key={todo.id}>
           {todo.title}
@@ -32,10 +36,10 @@ const _App: React.FC<AppProps> = props => {
     });
   };
   React.useEffect((): void => {
-    if (fetching && props.todos.length !== 0) {
+    if (fetching && todos.length !== 0) {
       setFetching(false);
     }
-  }, [fetching, props.todos]);
+  }, [fetching, todos]);
   return (
     <div>
       <button onClick={onButtonClick}>Fetch</button>
@@ -44,16 +48,5 @@ const _App: React.FC<AppProps> = props => {
     </div>
   );
 };
-
-const mapStateToProps = ({ todos }: StoreState): { todos: Todo[] } => {
-  return {
-    todos
-  };
-};
-
-const App = connect(
-  mapStateToProps,
-  { fetchTodos, deleteTodo }
-)(_App);
 
 export default App;
