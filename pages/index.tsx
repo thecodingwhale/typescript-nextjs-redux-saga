@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Hello from '../src/components/Hello/Hello';
+import Hello from '@components/Hello/Hello';
 
 const IndexRoot: React.FC = (): JSX.Element => {
   return (

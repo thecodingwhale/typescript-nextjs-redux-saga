@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Todo, fetchTodos, deleteTodo } from '../src/containers/Todo/action';
+import { Todo, fetchTodos, deleteTodo } from '@containers/Todo/action';
 import { StoreState } from '../rootReducer';
 
 interface TodoProps {
