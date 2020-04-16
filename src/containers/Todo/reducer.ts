@@ -1,10 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import {
-  Todo,
-  ActionTypes,
-  GetTodosAction,
-  DeleteTodoAction
-} from '../actions';
+import { Todo, ActionTypes, GetTodosAction, DeleteTodoAction } from './action';
 
 const initialState = [];
 export const todosReducers = createReducer(initialState, {

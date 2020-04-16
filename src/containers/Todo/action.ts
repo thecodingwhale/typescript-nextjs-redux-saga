@@ -1,7 +1,14 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { createAction } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { ActionTypes } from './types';
+
+export enum ActionTypes {
+  fetchTodos = 'TODOS/FETCH_TODOS',
+  getTodos = 'TODOS/GET_TODOS',
+  deleteTodo = 'TODOS/DELETE_TODO'
+}
+
+export type Action = FetchTodosAction | DeleteTodoAction | GetTodosAction;
 
 export interface Todo {
   id: number;
