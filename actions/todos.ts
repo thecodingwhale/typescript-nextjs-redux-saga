@@ -1,7 +1,6 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
-import { createAction } from 'redux-actions';
+import { createAction } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { Dispatch } from 'redux';
 import { ActionTypes } from './types';
 
 export interface Todo {
@@ -27,19 +26,14 @@ export interface DeleteTodoAction {
 
 const url = 'http://jsonplaceholder.typicode.com/todos';
 
-export const deleteTodo = (id: number): DeleteTodoAction => {
-  return {
-    type: ActionTypes.deleteTodo,
-    payload: id
-  };
-};
-
 export const fetchTodos = createAction(ActionTypes.fetchTodos);
+
+export const deleteTodo = createAction<number>(ActionTypes.deleteTodo);
 
 export function* fetchTodosAsync() {
   const todos = () => axios.get<Todo[]>(url);
   const request = yield call(todos);
-  yield put({
+  yield put<GetTodosAction>({
     type: ActionTypes.getTodos,
     payload: request.data
   });
