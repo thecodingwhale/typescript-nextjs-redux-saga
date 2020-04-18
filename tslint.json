@@ -14,12 +14,7 @@
       }
     ],
     "variable-name": {
-      "options": [
-        "ban-keywords",
-        "check-format",
-        "allow-leading-underscore",
-        "allow-pascal-case"
-      ]
+      "options": ["ban-keywords", "check-format", "allow-leading-underscore", "allow-pascal-case"]
     },
     "max-line-length": [
       true,
@@ -33,7 +28,7 @@
       {
         "singleline": "never",
         "multiline": {
-          "objects": "never",
+          "objects": "always",
           "arrays": "always",
           "functions": "never",
           "typeLiterals": "ignore"

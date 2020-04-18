@@ -9,7 +9,7 @@ const Hello: React.FC<HelloProps> = ({ name }: HelloProps): JSX.Element => {
 };
 
 Hello.defaultProps = {
-  name: 'Stranger'
+  name: 'Stranger',
 };
 
 export default Hello;

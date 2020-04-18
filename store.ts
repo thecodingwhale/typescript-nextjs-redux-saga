@@ -20,7 +20,7 @@ export default (preloadedState = {}) => {
     middleware,
     preloadedState,
     reducer: rootReducer,
-    devTools: devMode
+    devTools: devMode,
   });
   (store as any).sagaTask = sagaMiddleware.run(rootSaga);
   return store;

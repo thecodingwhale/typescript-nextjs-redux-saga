@@ -7,7 +7,7 @@ export interface StoreState {
 }
 
 const rootReducer = combineReducers({
-  todos: todosReducers
+  todos: todosReducers,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

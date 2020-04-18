@@ -5,7 +5,7 @@ import axios from 'axios';
 export enum ActionTypes {
   fetchTodos = 'TODOS/FETCH_TODOS',
   getTodos = 'TODOS/GET_TODOS',
-  deleteTodo = 'TODOS/DELETE_TODO'
+  deleteTodo = 'TODOS/DELETE_TODO',
 }
 
 export type Action = FetchTodosAction | DeleteTodoAction | GetTodosAction;
@@ -42,7 +42,7 @@ export function* fetchTodosAsync() {
   const request = yield call(todos);
   yield put<GetTodosAction>({
     type: ActionTypes.getTodos,
-    payload: request.data
+    payload: request.data,
   });
 }
 
