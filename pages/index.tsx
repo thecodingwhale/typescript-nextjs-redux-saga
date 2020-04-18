@@ -1,12 +1,12 @@
-import * as React from 'react';
-import Hello from '@components/Hello/Hello';
+import * as React from 'react'
+import Hello from '@components/Hello/Hello'
 
 const IndexRoot: React.FC = (): JSX.Element => {
   return (
     <div>
       <Hello />
     </div>
-  );
-};
+  )
+}
 
-export default IndexRoot;
+export default IndexRoot

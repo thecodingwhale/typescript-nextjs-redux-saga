@@ -1,18 +1,18 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import logger from 'redux-logger';
-import createSagaMiddleware from 'redux-saga';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
+import logger from 'redux-logger'
+import createSagaMiddleware from 'redux-saga'
 
-import rootReducer from './rootReducer';
-import rootSaga from './rootSaga';
+import rootReducer from './rootReducer'
+import rootSaga from './rootSaga'
 
-const devMode = process.env.NODE_ENV === 'development';
+const devMode = process.env.NODE_ENV === 'development'
 
-const sagaMiddleware = createSagaMiddleware();
+const sagaMiddleware = createSagaMiddleware()
 
-const middleware = [...getDefaultMiddleware({ thunk: false }), sagaMiddleware];
+const middleware = [...getDefaultMiddleware({ thunk: false }), sagaMiddleware]
 
 if (devMode) {
-  middleware.push(logger);
+  middleware.push(logger)
 }
 
 export default (preloadedState = {}) => {
@@ -21,7 +21,7 @@ export default (preloadedState = {}) => {
     preloadedState,
     reducer: rootReducer,
     devTools: devMode,
-  });
-  (store as any).sagaTask = sagaMiddleware.run(rootSaga);
-  return store;
-};
+  }) // tslint:disable
+  ;(store as any).sagaTask = sagaMiddleware.run(rootSaga)
+  return store
+}

@@ -36,6 +36,7 @@
       }
     ],
     "react-hooks-nesting": true,
-    "ter-arrow-parens": [true, "as-needed"]
+    "ter-arrow-parens": [true, "as-needed"],
+    "semicolon": [true, "never"]
   }
 }
