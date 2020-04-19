@@ -7,9 +7,6 @@ interface TodoProps {
   todos: Todo[]
   fetchTodos: Function
   deleteTodo: typeof deleteTodo
-}
-
-interface TodoProps {
   fetching: boolean
 }
 
@@ -29,7 +26,7 @@ const TodoPage: React.FC<TodoProps> = () => {
   const renderLists = (): JSX.Element[] => {
     return todos.map((todo: Todo) => {
       return (
-        <div onClick={() => onTodoClick(todo.id)} key={todo.id}>
+        <div onClick={() => onTodoClick(todo.id)} key={todo.id} data-testid={`todo-list-${todo.id}`}>
           {todo.title}
         </div>
       )
@@ -42,7 +39,9 @@ const TodoPage: React.FC<TodoProps> = () => {
   }, [fetching, todos])
   return (
     <div>
-      <button onClick={onButtonClick}>Fetch</button>
+      <button onClick={onButtonClick} data-testid="button-fetch">
+        Fetch
+      </button>
       {fetching ? 'LOADING' : null}
       {renderLists()}
     </div>

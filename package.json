@@ -23,7 +23,7 @@
       "prettier --write",
       "git add",
       "jest --findRelatedTests",
-      "tslint"
+      "tslint -p . -c tslint.json"
     ]
   },
   "keywords": [],
@@ -58,6 +58,7 @@
     "prettier": "^2.0.4",
     "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.5.4",
     "ts-jest": "^25.3.1",
     "tslint": "^6.1.1",
     "tslint-config-airbnb": "^5.11.2",

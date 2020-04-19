@@ -6,3 +6,8 @@ The goal is to make those there work together as expected.
 
 https://github.com/gothinkster/realworld/tree/master/spec
 https://github.com/gothinkster/realworld/tree/master/api
+
+# Helpful Articles
+
+https://medium.com/@fedetritri/how-to-test-react-component-with-react-redux-useselector-usedispatch-a146cbb11fb
+https://www.robinwieruch.de/react-connected-component-test
