@@ -2,6 +2,7 @@ import Router from 'next/router'
 import { takeEvery, put, call } from 'redux-saga/effects'
 import axios from 'axios'
 import { createAction } from '@reduxjs/toolkit'
+import { setCookie } from 'nookies'
 
 export type FormData = {
   email: string
@@ -35,6 +36,9 @@ export function* onFormLoginSubmitAsync(action) {
     const response = yield call(login)
     yield put(onFormLoginSuccess(response.data.user))
     yield put(onFormLoginSetStatus(ActionTypes.formStatusSuccess))
+    setCookie(null, 'token', response.data.user.token, {
+      maxAge: 30 * 24 * 60 * 60,
+    })
     yield call(Router.push, '/')
   } catch (error) {
     yield put(onFormLoginSetStatus(ActionTypes.formStatusError))
