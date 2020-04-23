@@ -14,11 +14,12 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": "./",
+    "types": ["cypress", "@types/testing-library__cypress"],
     "paths": {
       "@components/*": ["./src/components/*"],
       "@containers/*": ["./src/containers/*"]
     }
   },
   "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "jest.setup.ts"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "jest.setup.ts", "cypress/support/commands.js"]
 }
