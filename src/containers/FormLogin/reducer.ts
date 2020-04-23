@@ -19,4 +19,10 @@ export const formLoginReducers = createReducer(initialState, {
       user: action.payload,
     }
   },
+  [ActionTypes.onFormLoginLogout]: (state, action) => {
+    return {
+      ...state,
+      user: null,
+    }
+  },
 })
