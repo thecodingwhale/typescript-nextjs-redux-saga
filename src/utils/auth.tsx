@@ -1,18 +1,18 @@
 import Router from 'next/router'
-import nextCookie from 'next-cookies'
+import nookies from 'nookies'
 
 export const auth = (ctx) => {
-  const { token } = nextCookie(ctx)
-
-  if (ctx.req && !token) {
+  const cookies = nookies.get(ctx)
+  console.log('cookies.token: ', cookies.token)
+  if (ctx.req && !cookies.token) {
     ctx.res.writeHead(302, { Location: '/' })
     ctx.res.end()
     return
   }
 
-  if (!token) {
+  if (!cookies.token) {
     Router.push('/')
   }
 
-  return token
+  return cookies.token
 }
