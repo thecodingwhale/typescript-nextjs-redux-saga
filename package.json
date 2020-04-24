@@ -10,6 +10,7 @@
     "tslint": "tslint -p . -c tslint.json",
     "test": "jest",
     "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage --coverageDirectory=output/coverage/jest",
     "prettier:check": "prettier --write \"**/*.+(ts|tsx)\"",
     "prettier:write": "prettier --write \"**/*.+(ts|tsx)\"",
     "cypress": "cypress open"
