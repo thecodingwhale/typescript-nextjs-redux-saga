@@ -17,7 +17,8 @@
     "types": ["cypress", "@types/testing-library__cypress"],
     "paths": {
       "@components/*": ["./src/components/*"],
-      "@containers/*": ["./src/containers/*"]
+      "@containers/*": ["./src/containers/*"],
+      "@utils/*": ["./src/utils/*"]
     }
   },
   "exclude": ["node_modules"],
