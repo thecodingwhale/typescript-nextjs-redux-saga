@@ -1,11 +1,12 @@
 import '@testing-library/jest-dom'
+import { renderHook } from '@testing-library/react-hooks'
 import React from 'react'
 import { Provider } from 'react-redux'
 import { render, fireEvent } from '@testing-library/react'
 import { fetchTodos, deleteTodo } from '@containers/Todo/action'
 import configureMockStore from 'redux-mock-store'
 import createSagaMiddleware from 'redux-saga'
-import TodoPage from '../todos'
+import TodoPage, { useFetching } from '../todos'
 
 const sagaMiddleware = createSagaMiddleware()
 const mockStore = configureMockStore([sagaMiddleware])
@@ -50,13 +51,19 @@ describe('<TodoPage />', () => {
     )
   })
 
+  test('should use useFetching()', async () => {
+    const { result } = renderHook(() => useFetching())
+    expect(result.current.fetching).toBe(false)
+    expect(typeof result.current.setFetching).toBe('function')
+  })
+
   test('should have button', async () => {
     const { getByText } = component
     expect(getByText('Fetch')).toBeInTheDocument()
   })
 
   test('should display loading when button is click', async () => {
-    const { getByText, findByTestId } = component
+    const { getByText, findByTestId } = await component
     const buttonFetch = await findByTestId('button-fetch')
     fireEvent.click(buttonFetch)
     expect(getByText('LOADING')).toBeInTheDocument()

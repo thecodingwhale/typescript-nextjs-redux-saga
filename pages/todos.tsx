@@ -10,12 +10,17 @@ interface TodoProps {
   fetching: boolean
 }
 
+export const useFetching = () => {
+  const [fetching, setFetching] = React.useState<TodoProps | boolean>(false)
+  return { fetching, setFetching }
+}
+
 const TodoPage: React.FC<TodoProps> = () => {
   const dispatch = useDispatch()
   const todos = useSelector((state: StoreState): Todo[] => {
     return state.todos
   })
-  const [fetching, setFetching] = React.useState<TodoProps | boolean>(false)
+  const { fetching, setFetching } = useFetching()
   const onButtonClick = (): void => {
     dispatch(fetchTodos())
     setFetching(true)
@@ -42,8 +47,7 @@ const TodoPage: React.FC<TodoProps> = () => {
       <button onClick={onButtonClick} data-testid="button-fetch">
         Fetch
       </button>
-      {fetching ? 'LOADING' : null}
-      {renderLists()}
+      {fetching ? 'LOADING' : renderLists()}
     </div>
   )
 }
