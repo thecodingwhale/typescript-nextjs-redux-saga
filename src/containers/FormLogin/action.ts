@@ -2,7 +2,7 @@ import Router from 'next/router'
 import { takeEvery, put, call } from 'redux-saga/effects'
 import axios from 'axios'
 import { createAction } from '@reduxjs/toolkit'
-import { setCookie, destroyCookie } from 'nookies'
+import { parseCookies, setCookie, destroyCookie } from 'nookies'
 
 export type FormData = {
   email: string
@@ -19,6 +19,16 @@ export enum ActionTypes {
   formStatusSuccess = 'FORM_LOGIN/SUCCESS',
 }
 
+export const api = {
+  login: ({ email, password }) => {
+    return axios.post('https://conduit.productionready.io/api/users/login', {
+      user: {
+        email,
+        password,
+      },
+    })
+  },
+}
 export const onFormLoginSubmit = createAction<FormData>(ActionTypes.onFormLoginSubmit)
 export const onFormLoginSetStatus = createAction<string>(ActionTypes.onFormLoginSetStatus)
 export const onFormLoginSuccess = createAction<object>(ActionTypes.onFormLoginSuccess)
@@ -28,14 +38,7 @@ export function* onFormLoginSubmitAsync(action) {
   yield put(onFormLoginSetStatus(ActionTypes.formStatusSubmitting))
   try {
     const { email, password } = <FormData>action.payload
-    const login = () =>
-      axios.post('https://conduit.productionready.io/api/users/login', {
-        user: {
-          email,
-          password,
-        },
-      })
-    const response = yield call(login)
+    const response = yield call(api.login, { email, password })
     yield put(onFormLoginSuccess(response.data.user))
     yield put(onFormLoginSetStatus(ActionTypes.formStatusSuccess))
     setCookie(null, 'token', response.data.user.token, {
@@ -45,7 +48,6 @@ export function* onFormLoginSubmitAsync(action) {
     yield put(onFormLoginSetStatus(null))
   } catch (error) {
     yield put(onFormLoginSetStatus(ActionTypes.formStatusError))
-    console.log(error.response)
   }
 }
 

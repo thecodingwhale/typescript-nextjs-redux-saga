@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faThumbsUp, faEnvelope, faExclamationTriangle, faUser, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faExclamationTriangle, faUser } from '@fortawesome/free-solid-svg-icons'
 import { ActionTypes, onFormLoginSubmit, FormData } from '@containers/FormLogin/action'
 
 interface FormLoginProps {
@@ -32,6 +32,7 @@ const LoginRoot: React.FC<FormLoginProps> = (): JSX.Element => {
           <label className="label">Email</label>
           <div className="control has-icons-left has-icons-right">
             <input
+              data-testid="email"
               disabled={
                 selector.status === ActionTypes.formStatusSubmitting ||
                 selector.status === ActionTypes.formStatusSuccess
@@ -61,6 +62,7 @@ const LoginRoot: React.FC<FormLoginProps> = (): JSX.Element => {
           <label className="label">Password</label>
           <div className="control has-icons-left has-icons-right">
             <input
+              data-testid="password"
               disabled={
                 selector.status === ActionTypes.formStatusSubmitting ||
                 selector.status === ActionTypes.formStatusSuccess
@@ -93,6 +95,7 @@ const LoginRoot: React.FC<FormLoginProps> = (): JSX.Element => {
         <div className="field is-grouped">
           <div className="control">
             <button
+              data-testid="submit"
               type="submit"
               className="button is-link"
               disabled={
