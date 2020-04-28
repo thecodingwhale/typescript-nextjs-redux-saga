@@ -18,7 +18,8 @@
     "paths": {
       "@components/*": ["./src/components/*"],
       "@containers/*": ["./src/containers/*"],
-      "@utils/*": ["./src/utils/*"]
+      "@utils/*": ["./src/utils/*"],
+      "@lib/*": ["./lib/*"]
     }
   },
   "exclude": ["node_modules"],

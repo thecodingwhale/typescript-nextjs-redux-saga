@@ -1,15 +1,15 @@
 import Router from 'next/router'
 import { runSaga } from 'redux-saga'
 import mockAxios from 'axios'
+import { setCookie } from 'nookies'
+import { SERVER_BASE_URL } from '@lib/utils/constant'
 import {
   ActionTypes,
   onFormLoginSetStatus,
   onFormLoginSuccess,
   onFormLoginSubmitAsync,
   onFormLoginLogoutAsync,
-  api,
 } from './action'
-import { setCookie } from 'nookies'
 
 async function recordSaga(saga, initialAction) {
   const dispatched = []
@@ -55,12 +55,18 @@ describe('onFormLoginSubmitAsync', () => {
     }
     const dispatched = await recordSaga(onFormLoginSubmitAsync, initialAction)
     expect(mockAxios.post).toHaveBeenCalledTimes(1)
-    expect(mockAxios.post).toHaveBeenCalledWith('https://conduit.productionready.io/api/users/login', {
-      user: {
-        email,
-        password,
+    expect(mockAxios.post).toHaveBeenCalledWith(
+      `${SERVER_BASE_URL}/users/login`,
+      {
+        user: {
+          email,
+          password,
+        },
       },
-    })
+      {
+        headers: { 'Content-Type': 'application/json' },
+      }
+    )
     expect(dispatched).toContainEqual(onFormLoginSetStatus(ActionTypes.formStatusSubmitting))
     expect(dispatched).toContainEqual(onFormLoginSuccess({ email, password, token }))
     expect(dispatched).toContainEqual(onFormLoginSetStatus(ActionTypes.formStatusSuccess))
