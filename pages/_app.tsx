@@ -14,6 +14,8 @@ import { RootState } from '../rootReducer'
 import createStore from '../store'
 import '../src/styles/styles.scss'
 
+import Navbar from '@containers/Navbar/Navbar'
+
 interface Props {
   store: Store<RootState, AnyAction>
   app: StatelessComponent
@@ -30,7 +32,10 @@ class MyApp extends App<Props, StatelessComponent> {
     return (
       <Provider store={store}>
         <PersistGate persistor={persistStore(store)}>
-          <Component {...pageProps} />
+          <div className="container">
+            <Navbar />
+            <Component {...pageProps} />
+          </div>
         </PersistGate>
       </Provider>
     )
