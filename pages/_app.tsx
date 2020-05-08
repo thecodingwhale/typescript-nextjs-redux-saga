@@ -32,10 +32,8 @@ class MyApp extends App<Props, StatelessComponent> {
     return (
       <Provider store={store}>
         <PersistGate persistor={persistStore(store)}>
-          <div className="container">
-            <Navbar />
-            <Component {...pageProps} />
-          </div>
+          <Navbar />
+          <Component {...pageProps} />
         </PersistGate>
       </Provider>
     )

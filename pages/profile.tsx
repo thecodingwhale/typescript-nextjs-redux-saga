@@ -12,7 +12,9 @@ const Profile = () => {
   }
   return (
     <div>
-      <Hello name={username} />
+      <h1>
+        Hello, <span data-testid="username">{username}</span>
+      </h1>
       <button onClick={onClickLogout}>Logout</button>
     </div>
   )

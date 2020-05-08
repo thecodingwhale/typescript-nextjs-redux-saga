@@ -3,6 +3,7 @@
 The goal is to make those there work together as expected.
 
 https://github.com/gothinkster/realworld
+https://react-redux.realworld.io/
 
 ### Helpful Articles
 
