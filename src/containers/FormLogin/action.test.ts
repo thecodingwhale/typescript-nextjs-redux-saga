@@ -1,8 +1,8 @@
 import Router from 'next/router'
 import { runSaga } from 'redux-saga'
-import mockAxios from 'axios'
 import { setCookie } from 'nookies'
-import { SERVER_BASE_URL } from '@lib/utils/constant'
+import UserAPI from '@lib/api/user'
+
 import {
   ActionTypes,
   onFormLoginSetStatus,
@@ -19,56 +19,59 @@ async function recordSaga(saga, initialAction) {
     },
     saga,
     initialAction
-  ).done
+  ).toPromise
   return dispatched
 }
 
-jest.mock('axios')
+// jest.mock('axios', () => ({
+//   interceptors: {
+//     request: { use: jest.fn(), eject: jest.fn() },
+//     response: { use: jest.fn(), eject: jest.fn() },
+//   },
+// }))
+// jest.mock('axios')
 jest.mock('next/router', () => ({ push: jest.fn() }))
 jest.mock('nookies', () => ({
   setCookie: jest.fn(),
   destroyCookie: jest.fn(),
 }))
 
+const id = 1
+const image = 'iimage'
 const email = 'foo@email.com'
 const password = 'password'
 const token = 'token'
+const bio = 'bio'
+const createdAt = 'createdAt'
+const updatedAt = 'updatedAt'
+const username = 'username'
+
+const expectedResponse = {
+  id,
+  image,
+  email,
+  token,
+  bio,
+  createdAt,
+  updatedAt,
+  username,
+}
 
 describe('onFormLoginSubmitAsync', () => {
-  beforeEach(() => {
+  afterEach(() => {
     jest.resetAllMocks()
   })
 
   it('should authenticate and redirect to profile page', async () => {
-    mockAxios.post.mockImplementationOnce(() =>
-      Promise.resolve({
-        data: {
-          user: { email, password, token },
-        },
-      })
-    )
-    const initialAction = {
+    jest.spyOn(UserAPI, 'login').mockResolvedValue({ ...expectedResponse })
+    const dispatched = await recordSaga(onFormLoginSubmitAsync, {
       payload: {
         email,
         password,
       },
-    }
-    const dispatched = await recordSaga(onFormLoginSubmitAsync, initialAction)
-    expect(mockAxios.post).toHaveBeenCalledTimes(1)
-    expect(mockAxios.post).toHaveBeenCalledWith(
-      `${SERVER_BASE_URL}/users/login`,
-      {
-        user: {
-          email,
-          password,
-        },
-      },
-      {
-        headers: { 'Content-Type': 'application/json' },
-      }
-    )
+    })
     expect(dispatched).toContainEqual(onFormLoginSetStatus(ActionTypes.formStatusSubmitting))
-    expect(dispatched).toContainEqual(onFormLoginSuccess({ email, password, token }))
+    expect(dispatched).toContainEqual(onFormLoginSuccess(expectedResponse))
     expect(dispatched).toContainEqual(onFormLoginSetStatus(ActionTypes.formStatusSuccess))
     expect(setCookie).toHaveBeenCalled()
     expect(Router.push).toHaveBeenCalledWith('/profile')
@@ -76,7 +79,7 @@ describe('onFormLoginSubmitAsync', () => {
   })
 
   it('should catch error on invalid login', async () => {
-    mockAxios.post.mockImplementationOnce(() => Promise.reject(new Error('Something went wrong')))
+    jest.spyOn(UserAPI, 'login').mockRejectedValue('error')
     const initialAction = {
       payload: {
         email,

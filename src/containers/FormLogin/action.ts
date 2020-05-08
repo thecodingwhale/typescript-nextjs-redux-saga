@@ -2,7 +2,23 @@ import Router from 'next/router'
 import { takeEvery, put, call } from 'redux-saga/effects'
 import { createAction } from '@reduxjs/toolkit'
 import { setCookie, destroyCookie } from 'nookies'
-import ApiUser from '@lib/api/user'
+import UserAPI from '@lib/api/user'
+
+export type LoginCredentials = {
+  email: string
+  password: string
+}
+
+export interface UserState {
+  bio: string
+  createdAt: string
+  email: string
+  id: number
+  image: string
+  token: string
+  updatedAt: string
+  username: string
+}
 
 export type FormData = {
   email: string
@@ -19,19 +35,23 @@ export enum ActionTypes {
   formStatusSuccess = 'FORM_LOGIN/SUCCESS',
 }
 
-export const onFormLoginSubmit = createAction<FormData>(ActionTypes.onFormLoginSubmit)
-export const onFormLoginSetStatus = createAction<string>(ActionTypes.onFormLoginSetStatus)
+export type FormSetStatusAction =
+  | ActionTypes.formStatusSubmitting
+  | ActionTypes.formStatusSuccess
+  | ActionTypes.formStatusError
+
+export const onFormLoginSubmit = createAction<LoginCredentials>(ActionTypes.onFormLoginSubmit)
+export const onFormLoginSetStatus = createAction<FormSetStatusAction>(ActionTypes.onFormLoginSetStatus)
 export const onFormLoginSuccess = createAction<object>(ActionTypes.onFormLoginSuccess)
 export const onFormLoginLogout = createAction(ActionTypes.onFormLoginLogout)
 
 export function* onFormLoginSubmitAsync(action) {
   yield put(onFormLoginSetStatus(ActionTypes.formStatusSubmitting))
   try {
-    const { email, password } = <FormData>action.payload
-    const response = yield call(ApiUser.login, { email, password })
-    yield put(onFormLoginSuccess(response.data.user))
+    const response = yield call(UserAPI.login, <LoginCredentials>action.payload)
+    yield put(onFormLoginSuccess(response))
     yield put(onFormLoginSetStatus(ActionTypes.formStatusSuccess))
-    setCookie(null, 'token', response.data.user.token, {
+    setCookie(null, 'token', response.token, {
       maxAge: 30 * 24 * 60 * 60,
     })
     yield call(Router.push, '/profile')
