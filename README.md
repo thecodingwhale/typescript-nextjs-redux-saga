@@ -23,3 +23,7 @@ https://gist.github.com/cowboy/44ae5deed5d04d2cf28f2087fde2c89c
 ### Reminder
 
 cookie testing
+
+### TODO
+
+create automation for component and containers
