@@ -28,4 +28,6 @@ class TagAPI extends Api {
   }
 }
 
+export { TagAPI }
+
 export default new TagAPI(apiConfig)
