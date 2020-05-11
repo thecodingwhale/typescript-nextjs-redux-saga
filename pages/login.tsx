@@ -60,7 +60,6 @@ const LoginRoot: React.FC<FormLoginProps> = (): JSX.Element => {
                     )}
                   </div>
                   {errors.email && <p className="help is-danger">{errors.email.message}</p>}
-                  {/* <p className="help is-danger">This email is invalid</p> */}
                 </div>
                 <div className="field">
                   <label className="label">Password</label>
@@ -89,12 +88,8 @@ const LoginRoot: React.FC<FormLoginProps> = (): JSX.Element => {
                         <FontAwesomeIcon icon={faExclamationTriangle} />
                       </span>
                     )}
-                    {/* <span className="icon is-small is-right">
-          <FontAwesomeIcon icon={faCheck} />
-        </span> */}
                   </div>
                   {errors.password && <p className="help is-danger">{errors.password.message}</p>}
-                  {/* <p className="help is-success">This password is available</p> */}
                 </div>
                 <div className="field is-grouped">
                   <div className="control">
