@@ -13,3 +13,5 @@ yarn-debug.log*
 yarn-error.log*
 # Code Coverage
 output
+#Typescript Coverage
+coverage-ts
