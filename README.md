@@ -19,6 +19,9 @@ https://dev.to/phil/the-best-way-to-test-redux-sagas-4hib
 https://medium.com/@enetoOlveda/how-to-use-axios-typescript-like-a-pro-7c882f71e34a
 https://levelup.gitconnected.com/a-typescript-safe-api-82cc22c4f92d
 https://gist.github.com/cowboy/44ae5deed5d04d2cf28f2087fde2c89c
+https://aganglada.com/blog/mocking-a-server-error-with-cypress/
+https://aganglada.com/blog/mocking-a-server-error-with-cypress/
+https://aganglada.com/blog/mocking-a-server-error-with-cypress/
 
 ### Reminder
 

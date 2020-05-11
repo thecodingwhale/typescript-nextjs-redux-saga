@@ -1,5 +1,4 @@
 import * as React from 'react'
-import Hello from '@components/Hello/Hello'
 import { onFormLoginLogout } from '@containers/FormLogin/action'
 import { useSelector, useDispatch } from 'react-redux'
 import { auth } from '@utils/auth'
