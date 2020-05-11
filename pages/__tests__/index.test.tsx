@@ -1,31 +1,21 @@
-import { Provider } from 'react-redux'
-import { render, screen, waitFor } from '@testing-library/react'
-import configureMockStore from 'redux-mock-store'
-import createSagaMiddleware from 'redux-saga'
+import { screen } from '@testing-library/react'
+import { renderTestComponent } from '@lib/utils/testing'
 import IndexRoot from '../index'
 
-const sagaMiddleware = createSagaMiddleware()
-const mockStore = configureMockStore([sagaMiddleware])
-
 describe('Index Root', () => {
-  let store
-  let component
-
   beforeEach(() => {
-    store = mockStore({
-      tags: {
-        tags: [],
-        status: null,
+    renderTestComponent(
+      {
+        tags: {
+          data: [],
+          status: null,
+        },
+        formLogin: {
+          user: null,
+        },
       },
-      formLogin: {
-        user: null,
-      },
-    })
-    store.dispatch = jest.fn()
-    component = render(
-      <Provider store={store}>
-        <IndexRoot />
-      </Provider>
+      {},
+      IndexRoot
     )
   })
 
@@ -34,22 +24,20 @@ describe('Index Root', () => {
   })
 
   it('should display your feed if the user is login', async () => {
-    store = mockStore({
-      tags: {
-        tags: [],
-        status: null,
-      },
-      formLogin: {
-        user: {
-          username: 'John Doe',
+    renderTestComponent(
+      {
+        tags: {
+          data: [],
+          status: null,
+        },
+        formLogin: {
+          user: {
+            username: 'John Doe',
+          },
         },
       },
-    })
-    store.dispatch = jest.fn()
-    component = render(
-      <Provider store={store}>
-        <IndexRoot />
-      </Provider>
+      {},
+      IndexRoot
     )
     expect(screen.getByText('Your Feed')).toBeTruthy()
   })

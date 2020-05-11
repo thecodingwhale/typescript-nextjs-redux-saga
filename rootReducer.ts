@@ -1,15 +1,15 @@
 import { combineReducers } from '@reduxjs/toolkit'
-import { todosReducers } from '@containers/Todo/reducer'
 import { formLoginReducers } from '@containers/FormLogin/reducer'
 import { tagsReducers } from '@containers/PopularTags/reducer'
-import { Todo } from '@containers/Todo/action'
+import { UserState } from '@containers/FormLogin/action'
+import { TagState } from '@containers/PopularTags/action'
 
 export interface StoreState {
-  todos: Todo[]
+  formLogin: UserState
+  tags: TagState
 }
 
 const rootReducer = combineReducers({
-  todos: todosReducers,
   formLogin: formLoginReducers,
   tags: tagsReducers,
 })

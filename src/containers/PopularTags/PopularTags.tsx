@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Loader from '@components/Loader/Loader'
-import { ActionTypes, fetchTags } from './action'
+import { ActionTypes, fetchTags, TagState } from './action'
+import { StoreState } from '../../../rootReducer'
 
 const PopularTags: React.FC = (): JSX.Element => {
   const dispatch = useDispatch()
-  const tags = useSelector((state) => state.tags.tags)
-  const status = useSelector((state) => state.tags.status)
+  const { data, status }: TagState = useSelector((state: StoreState): TagState => state.tags)
 
   React.useEffect(() => {
     dispatch(fetchTags())
@@ -23,9 +23,9 @@ const PopularTags: React.FC = (): JSX.Element => {
         <React.Fragment>
           {status !== ActionTypes.onTagsError ? (
             <React.Fragment>
-              {tags.length !== 0 ? (
+              {data.length !== 0 ? (
                 <div className="buttons">
-                  {tags.map((tag, index) => (
+                  {data.map((tag, index) => (
                     <a key={`${index}-${tag}`} className="button is-small is-rounded">
                       {tag}
                     </a>

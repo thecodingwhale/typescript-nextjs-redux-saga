@@ -3,7 +3,8 @@ import { takeEvery, call, put } from 'redux-saga/effects'
 import TagApi from '@lib/api/tag'
 
 export interface TagState {
-  name: string
+  data: string[]
+  status: string
 }
 
 export enum ActionTypes {

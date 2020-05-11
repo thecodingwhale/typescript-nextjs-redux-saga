@@ -1,22 +1,32 @@
 import { createReducer } from '@reduxjs/toolkit'
-import { ActionTypes } from './action'
+import { ActionTypes, TagState, TagsSetStatusAction } from './action'
 
-const initialState = {
+interface SetStatusActions {
+  type: ActionTypes.onTagsSetStatus
+  payload: TagsSetStatusAction
+}
+
+interface SetTagsActions {
+  type: ActionTypes.setTags
+  payload: string[]
+}
+
+const initialState: TagState = {
   status: null,
-  tags: [],
+  data: [],
 }
 
 export const tagsReducers = createReducer(initialState, {
-  [ActionTypes.onTagsSetStatus]: (state, action) => {
+  [ActionTypes.onTagsSetStatus]: (state: TagState, action: SetStatusActions) => {
     return {
       ...state,
       status: action.payload,
     }
   },
-  [ActionTypes.setTags]: (state, action) => {
+  [ActionTypes.setTags]: (state: TagState, action: SetTagsActions) => {
     return {
       ...state,
-      tags: action.payload,
+      data: action.payload,
     }
   },
 })

@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faExclamationTriangle, faUser } from '@fortawesome/free-solid-svg-icons'
-import { ActionTypes, onFormLoginSubmit, FormData } from '@containers/FormLogin/action'
+import { ActionTypes, onFormLoginSubmit, FormData, UserState } from '@containers/FormLogin/action'
+import { StoreState } from '../rootReducer'
 
 interface FormLoginProps {
   onFormLoginSubmit: typeof onFormLoginSubmit
@@ -11,7 +12,7 @@ interface FormLoginProps {
 
 const LoginRoot: React.FC<FormLoginProps> = (): JSX.Element => {
   const dispatch = useDispatch()
-  const selector = useSelector((state) => state.formLogin)
+  const selector = useSelector((state: StoreState): UserState => state.formLogin)
   const { register, handleSubmit, errors } = useForm<FormData>()
   const onSubmit = handleSubmit(({ email, password }: FormData): void => {
     dispatch(onFormLoginSubmit({ email, password }))
