@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import { renderTestComponent } from '@lib/utils/testing'
-import IndexRoot from '../index'
+import IndexRoot from '../pages/index'
 
 describe('Index Root', () => {
   beforeEach(() => {

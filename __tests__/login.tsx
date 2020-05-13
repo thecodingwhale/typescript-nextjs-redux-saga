@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { screen, fireEvent, waitFor } from '@testing-library/react'
-import LoginPage from '../login'
+import LoginPage from '../pages/login'
 import { onFormLoginSubmit, ActionTypes } from '@containers/FormLogin/action'
 import { renderTestComponent } from '@lib/utils/testing'
 
