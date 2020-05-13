@@ -16,7 +16,8 @@
     "cypress": "cypress open",
     "ts-coverage": "typescript-coverage-report",
     "export": "next export",
-    "deploy": "npm run build && npm run export"
+    "deploy": "npm run build && npm run export",
+    "heroku-postbuild": "npm run build"
   },
   "husky": {
     "hooks": {
